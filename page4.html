@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>My Message For You</title>
   <style>
+    /* Loader styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s;
+    }
+    .heartbeat {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .heartbeat svg {
+      width: 80px;
+      height: 80px;
+      display: block;
+    }
+    .heartbeat .heart {
+      fill: #ff3366;
+      stroke: #fff;
+      stroke-width: 2px;
+      animation: beat 1s infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      10% { transform: scale(1.2); }
+      20% { transform: scale(0.95); }
+      30% { transform: scale(1.1); }
+      50% { transform: scale(1.25); }
+      70% { transform: scale(1); }
+    }
     /* Instagram-style card */
     .card {
       --bg: #f7f7f8;
@@ -136,25 +176,50 @@
   </style>
 </head>
 <body>
-  <h1 style="color:#ff3366; margin-top:48px; text-align:center; font-size:2rem; text-shadow:0 2px 12px #222, 0 1px 2px #ff3366; letter-spacing:2px;">My message for you love!</h1>
-  <div class="card">
-    <div class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-        <path d="M11.984 16.815c2.596 0 4.706-2.111 4.706-4.707 0-1.409-.623-2.674-1.606-3.538-.346-.303-.735-.556-1.158-.748-.593-.27-1.249-.421-1.941-.421s-1.349.151-1.941.421c-.424.194-.814.447-1.158.749-.985.864-1.608 2.129-1.608 3.538 0 2.595 2.112 4.706 4.706 4.706zm.016-8.184c1.921 0 3.479 1.557 3.479 3.478 0 1.921-1.558 3.479-3.479 3.479s-3.479-1.557-3.479-3.479c0-1.921 1.558-3.478 3.479-3.478zm5.223.369h6.777v10.278c0 2.608-2.114 4.722-4.722 4.722h-14.493c-2.608 0-4.785-2.114-4.785-4.722v-10.278h6.747c-.544.913-.872 1.969-.872 3.109 0 3.374 2.735 6.109 6.109 6.109s6.109-2.735 6.109-6.109c.001-1.14-.327-2.196-.87-3.109zm2.055-9h-12.278v5h-1v-5h-1v5h-1v-4.923c-.346.057-.682.143-1 .27v4.653h-1v-4.102c-1.202.857-2 2.246-2 3.824v3.278h7.473c1.167-1.282 2.798-2 4.511-2 1.722 0 3.351.725 4.511 2h7.505v-3.278c0-2.608-2.114-4.722-4.722-4.722zm2.722 5.265c0 .406-.333.735-.745.735h-2.511c-.411 0-.744-.329-.744-.735v-2.53c0-.406.333-.735.744-.735h2.511c.412 0 .745.329.745.735v2.53z"></path>
+  <div id="loader">
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100vw; height:100vh;">
+      <h2 style="color:#ff3366; font-size:2.4rem; font-family:'Poppins',sans-serif; text-align:center; text-shadow:0 2px 12px #222, 0 1px 2px #ff3366; margin-bottom:0;">Happy Anniversary, My Love!</h2>
+      <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top:12px;">
+        <path d="M10 30 Q40 40 70 30" stroke="#ff3366" stroke-width="2" fill="none"/>
+        <path d="M40 30 Q42 25 45 30 Q47 35 50 30" stroke="#ff3366" stroke-width="2" fill="none"/>
+        <path d="M45 30 Q47 25 50 30" stroke="#ff3366" stroke-width="2" fill="none"/>
+        <path d="M40 30 Q38 25 35 30 Q33 35 30 30" stroke="#ff3366" stroke-width="2" fill="none"/>
+        <path d="M35 30 Q33 25 30 30" stroke="#ff3366" stroke-width="2" fill="none"/>
       </svg>
     </div>
-    <strong>My Love</strong>
-    <div class="card__body">
-      To my love,<br><br>
-      I just want to say how grateful I am for you. You bring so much joy, laughter, and meaning into my life. Every moment with you is a memory I cherish, and every day I am reminded of how lucky I am to have you by my side.<br><br>
-      Thank you for your kindness, your patience, and your unwavering support. You inspire me to be a better person, and you make even the ordinary days feel extraordinary. I appreciate your love, your strength, and your beautiful heart.<br><br>
-      I promise to always be here for you, to support you, and to love you with all that I am. You are my best friend, my partner, and my greatest adventure.<br><br>
-      I love you more than words can express. Thank you for being you, and for sharing your life with me.<br><br>
-      Even when you get moody or act up and my patience runs thin, I’ll choose to stay instead of leaving you. I know that’s just how you are. I love you so much, my love.<br><br>
-      Happy Anniversary, my love!
-    </div>
-    <span>Yours forever</span>
   </div>
-  <a href="page2.html"><button class="back-btn">Back to Memories</button></a>
+  <div id="main-content" style="display:none;">
+    <h1 style="color:#ff3366; margin-top:48px; text-align:center; font-size:2rem; text-shadow:0 2px 12px #222, 0 1px 2px #ff3366; letter-spacing:2px;">My message for you love!</h1>
+    <div class="card">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M11.984 16.815c2.596 0 4.706-2.111 4.706-4.707 0-1.409-.623-2.674-1.606-3.538-.346-.303-.735-.556-1.158-.748-.593-.27-1.249-.421-1.941-.421s-1.349.151-1.941.421c-.424.194-.814.447-1.158.749-.985.864-1.608 2.129-1.608 3.538 0 2.595 2.112 4.706 4.706 4.706zm.016-8.184c1.921 0 3.479 1.557 3.479 3.478 0 1.921-1.558 3.479-3.479 3.479s-3.479-1.557-3.479-3.479c0-1.921 1.558-3.478 3.479-3.478zm5.223.369h6.777v10.278c0 2.608-2.114 4.722-4.722 4.722h-14.493c-2.608 0-4.785-2.114-4.785-4.722v-10.278h6.747c-.544.913-.872 1.969-.872 3.109 0 3.374 2.735 6.109 6.109 6.109s6.109-2.735 6.109-6.109c.001-1.14-.327-2.196-.87-3.109zm2.055-9h-12.278v5h-1v-5h-1v5h-1v-4.923c-.346.057-.682.143-1 .27v4.653h-1v-4.102c-1.202.857-2 2.246-2 3.824v3.278h7.473c1.167-1.282 2.798-2 4.511-2 1.722 0 3.351.725 4.511 2h7.505v-3.278c0-2.608-2.114-4.722-4.722-4.722zm2.722 5.265c0 .406-.333.735-.745.735h-2.511c-.411 0-.744-.329-.744-.735v-2.53c0-.406.333-.735.744-.735h2.511c.412 0 .745.329.745.735v2.53z"></path>
+        </svg>
+      </div>
+      <strong>My Love</strong>
+      <div class="card__body">
+        To my love,<br><br>
+        I just want to say how grateful I am for you. You bring so much joy, laughter, and meaning into my life. Every moment with you is a memory I cherish, and every day I am reminded of how lucky I am to have you by my side.<br><br>
+        Thank you for your kindness, your patience, and your unwavering support. You inspire me to be a better person, and you make even the ordinary days feel extraordinary. I appreciate your love, your strength, and your beautiful heart.<br><br>
+        I promise to always be here for you, to support you, and to love you with all that I am. You are my best friend, my partner, and my greatest adventure.<br><br>
+        I love you more than words can express. Thank you for being you, and for sharing your life with me.<br><br>
+        Even when you get moody or act up and my patience runs thin, I’ll choose to stay instead of leaving you. I know that’s just how you are. I love you so much, my love.<br><br>
+        Happy Anniversary, my love!
+      </div>
+      <span>Yours forever</span>
+    </div>
+    <a href="page2.html"><button class="back-btn">Back to Memories</button></a>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('loader').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('main-content').style.display = '';
+        }, 600);
+      }, 1500);
+    });
+  </script>
 </body>
 </html>
