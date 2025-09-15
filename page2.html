@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Memories - Anniversary</title>
+  <style>
+    @media (max-width: 700px) {
+      .header {
+        font-size: 1.4rem;
+        padding: 8px 8px;
+        top: 16px;
+        letter-spacing: 1px;
+        line-height: 1.1;
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .memories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 16px;
+        margin-top: 90px;
+        width: 98vw;
+        padding: 0 2vw;
+      }
+      .card {
+        width: 44vw;
+        max-width: 180px;
+        height: 180px;
+      }
+      .front img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .btn-float {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+    .btn-float {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      z-index: 10;
+    }
+    /* From Uiverse.io by ShrinilDhorda */
+    .btn {
+      font-size: 1.2rem;
+      padding: 1rem 2.5rem;
+      border: none;
+      outline: none;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      background-color: rgb(14, 14, 26);
+      color: rgb(234, 234, 234);
+      font-weight: 700;
+      transition: 0.6s;
+      box-shadow: 0px 0px 60px #1f4c65;
+      -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
+    }
+
+    .btn:active {
+      scale: 0.92;
+    }
+
+    .btn:hover {
+      background: rgb(2,29,78);
+      background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
+      color: rgb(4, 4, 38);
+    }
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 32px;
+      justify-items: center;
+      align-items: center;
+      margin-top: 180px;
+      width: 90vw;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-family: "Poppins", sans-serif;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      color: white;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .header {
+      word-break: break-word;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .btn, .back-btn {
+      font-size: 1rem;
+      padding: 0.8rem 2rem;
+      min-width: 120px;
+      box-sizing: border-box;
+    }
+    .memories-grid {
+      width: 100vw;
+      max-width: 1200px;
+      padding: 0 1vw;
+      box-sizing: border-box;
+    }
+      .header {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff3366;
+    text-shadow: 0 2px 12px #222, 0 1px 2px #ff3366;
+    z-index: 2;
+    letter-spacing: 2px;
+    background: rgba(30,30,30,0.8);
+    padding: 12px 32px;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px #222;
+      }
+
+    /* 🌸 Glowing rotating background */
+    .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.2),
+        rgba(0, 0, 0, 0.1)
+      );
+      z-index: 0;
+    }
+
+    .container::before,
+    .container::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        #ff9aa2,
+        #ffb7b2,
+        #ffdac1,
+        #e2f0cb,
+        #a2e4ff,
+        #c9afff,
+        #ffb7b2,
+        #ff9aa2
+      );
+      transform: translate(-50%, -50%);
+      animation: rotate 8s linear infinite;
+      filter: blur(50px);
+      opacity: 0.7;
+    }
+
+    .container::after {
+      width: 180%;
+      height: 180%;
+      animation: rotate-reverse 10s linear infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes rotate {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotate-reverse {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(-360deg); }
+    }
+
+    /* ❤️ Floating hearts */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: float 8s infinite ease-in;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(45deg) scale(0.8); opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(45deg) scale(1.2); opacity: 0; }
+    }
+
+    /* 🎴 Memory flip-cards */
+    .card {
+      overflow: visible;
+      width: 190px;
+      height: 254px;
+      perspective: 1000px;
+      z-index: 1; /* keeps cards above background */
+  border: 2px solid #ff3366;
+  box-shadow: 0 0 24px #222, 0px 0px 10px 1px #ff336655;
+  transition: transform 0.3s;
+    }
+
+    .card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 36px #ff3366cc, 0px 0px 16px 2px #222;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 300ms;
+      box-shadow: 0px 0px 10px 1px #00000055;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .front {
+      transform: rotateY(0deg);
+    }
+
+    .back {
+      transform: rotateY(180deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #151515;
+      color: white;
+    }
+
+    .back-content {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .card:hover .content {
+      transform: rotateY(180deg);
+    }
+
+    .front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-title {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .memory-text {
+      font-size: 12px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background removed -->
+  <div class="header">Our Memories Together</div>
+  <!-- From Uiverse.io by ShrinilDhorda -->
+  <a href="page3.html" class="btn-float"><button class="btn">Watch</button></a>
+
+  <!-- Floating hearts -->
+  <div class="heart" style="left:10%; animation-delay:0s;"></div>
+  <div class="heart" style="left:30%; animation-delay:2s;"></div>
+  <div class="heart" style="left:50%; animation-delay:4s;"></div>
+  <div class="heart" style="left:70%; animation-delay:1s;"></div>
+  <div class="heart" style="left:90%; animation-delay:3s;"></div>
+
+  <div class="memories-grid">
+    <!-- Memory 1 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="1.jpg" alt="Memory 1">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">First Date</div>
+            <div class="memory-text">The day we first met and shared laughs together 💕</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 2 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="2.jpg" alt="Memory 2">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Our Trip</div>
+            <div class="memory-text">Unforgettable travel and adventures together ✈️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 3 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="3.jpg" alt="Memory 3">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Anniversary</div>
+            <div class="memory-text">Celebrating our love stronger every year 🌹</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 4 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="4.jpg" alt="Memory 4">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Picnic Day</div>
+            <div class="memory-text">Relaxing together under the sun and sharing stories 🍉</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 5 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="5.jpg" alt="Memory 5">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">School Day</div>
+            <div class="memory-text">“Enjoying our school day moments and making memories together 📚✨</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 6 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="6.jpg" alt="Memory 6">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Birthday Surprise</div>
+            <div class="memory-text">A special day full of joy and surprises 🎂</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 7 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="7.jpg" alt="Memory 7">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Holiday Adventure</div>
+            <div class="memory-text">Exploring new places and making memories together 🌍</div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+    <!-- Memory 8 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="8.jpg" alt="Memory 8">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Trip Together</div>
+            <div class="memory-text">Making memories, one trip at a time. 🌍❤️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 9 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="9.jpg" alt="Memory 9">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">4by4 Picture</div>
+            <div class="memory-text">Making memories out of moments — no filter needed ✨</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory 10 -->
+    <div class="card">
+      <div class="content">
+        <div class="front">
+          <img src="10.jpg" alt="Memory 10">
+        </div>
+        <div class="back">
+          <div class="back-content">
+            <div class="memory-title">Beach Day</div>
+            <div class="memory-text">Salty air, sandy toes, and a heart full of sunshine 🌞</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
